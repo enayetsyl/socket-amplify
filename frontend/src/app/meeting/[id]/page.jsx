@@ -1,9 +1,8 @@
-import React from 'react'
 
-const page = () => {
+const MeetingPage = () => {
   return (
-    <div>page</div>
+    <div>MeetingPage</div>
   )
 }
 
-export default page
+export default MeetingPage

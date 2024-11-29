@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const { Server } = require("socket.io");
 const http = require("http");
+const setupMeetingSocket = require("./sockets/meetingSocket");
 
 const app = express();
 app.use(cors());
@@ -16,19 +17,7 @@ const io = new Server(server, {
     },
 });
 
-io.on("connection", (socket) => {
-    console.log(`New user connected: ${socket.id}`);
-
-    
-    socket.on("testEvent", (data) => {
-      console.log("Received from client:", data);
-      socket.emit("serverResponse", { message: "Hello, 1!" });
-  });
-
-    socket.on("disconnect", () => {
-        console.log(`User disconnected: ${socket.id}`);
-    });
-});
+setupMeetingSocket(io);
 
 server.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
